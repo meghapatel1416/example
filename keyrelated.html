@@ -10,8 +10,8 @@
     <input type="text"  onkeypress="allowNumbers(event)"/>
    
     <script>
-
-        function allowNumbers(event)
+        //only allowed numbers
+        const allowNumbers = (event) =>
         {
 
             if(event.key >= '0' && event.key<= '9')

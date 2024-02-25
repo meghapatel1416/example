@@ -8,7 +8,7 @@
 <body>
 
     <script>
-        //promise.all
+        //promise.all[any one API will fail outcome will be fail]
         let fetch1 = fetch("API");
         let fetch2 = fetch("API");
         Promise.all([fetch1,fetch2]).then(y=> {
@@ -17,13 +17,13 @@
             console.log(y)
         })
 
-        // Promise.allSettled
-        // Promise.any
+        // Promise.allSettled[only successfull API will get response]
+        // Promise.any[first successfull API will get display]
 
 
 
        
-
+//async is promise and await reads value. use to avoid multiple time .then
         const callAPI =  async ()=>{
 
             const output = await fetch("https://jsonplaceholder.typicode.com/comments")

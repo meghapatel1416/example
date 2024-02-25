@@ -1,86 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
 
     <input type="text" id="name" />
-    <input type="button" value="save" onclick="saveInformation()" />
-    <button onclick="clearItemFromLocal()">Clear</button>
+
+    <input type="button" value="save"  onclick="saveInformation()"/>
+
+    <button onclick="clearItemsFromLocal()">clear</button>
 
     <ul id="display"></ul>
-
     <script>
 
-        // let item = [];
-        const saveInformation = () => {
+    //    let items = [];
+    // sessionStorage.setItem("test","this is the value");
 
-            const item = JSON.parse(localStorage.getItem("item")) ?? [];
-            item.push(document.getElementById("name").value);
+       const saveInformation = ()=>{
 
-            // console.log(item)
+    
+       
+        const items = JSON.parse(localStorage.getItem("items"))??[];
 
-            localStorage.setItem("item", JSON.stringify(item));
-
-            displayInfo();
-
-        }
-
-        // console.log(item)
+        items.push(document.getElementById("name").value);
 
 
+        localStorage.setItem("items", JSON.stringify(items) );
 
-
-
-        const displayInfo = () => {
-            let i = JSON.parse(localStorage.getItem("item")) ?? [];
-
-            let it = i.map((value, index) => {
-
-
-                return `<li>${value}<button onclick="editItomFromList()">Edit</button><button onclick="removeItemFromList()">delete</button></li>`
-
-
-            })
-            document.getElementById("display").innerHTML = it.join(" ")
-        }
-
-
-        const clearItemFromLocal = () => {
-            localStorage.clear();
-
-
-            displayInfo();
-        }
-
-        const removeItemFromList = (index) => {
-            let array = JSON.parse(localStorage.getItem("item"));
-
-            array.splice(index, 1);
-            localStorage.setItem("item", JSON.stringify(array));
-
-            displayInfo();
-
-        }
-
-        const editItomFromList = (index) => {
-            let array1 = JSON.parse(localStorage.getItem("item"));
-
-            document.getElementById("name").value += name;
-            localStorage.setItem("item", JSON.stringify(array1));
-
-            displayInfo();
-
-        }
 
         displayInfo();
+
+
+       }
+
+       const displayInfo = ()=>{
+
+        let i = JSON.parse(localStorage.getItem("items"))?? [];
+        // ??[] bcz first time array will be empty or ()== null?[]:JSON.parse(localStorage.getItem("items"));
+    
+       let it =  i.map((value,index)=>{
+
+        return `<li>${value} <button onclick="removeItemFromList(${index})">Delete</button> <button>Edit</button> </li>`
+        })
+
+        document.getElementById("display").innerHTML = it.join(" ");
+
+       }
+
+    
+       const clearItemsFromLocal= ()=>{
+        // localStorage.clear();
+        localStorage.removeItem("items");
+
+        displayInfo();
+
+       }
+
+       const removeItemFromList = (index)=>{
+
+        let array = JSON.parse(localStorage.getItem("items"));
+
+        array.splice(index,1);
+
+        localStorage.setItem("items",JSON.stringify(array));
+
+        displayInfo();
+
+    
+       }
+       displayInfo();
+
+       console.log(items);
+
+
     </script>
-
+    
 </body>
-
 </html>

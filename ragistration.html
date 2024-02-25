@@ -56,11 +56,11 @@
 
             let obj={};
             fieldValues.forEach((v)=> {
-
+               //for the check box
                 if(v.type == "checkbox")
                 {
                     obj[v.id] = v.checked;
-
+                    //getting key from the variable so we use[] instesd of '.'
                 }
                 else
                 {
